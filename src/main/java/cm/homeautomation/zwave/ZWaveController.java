@@ -10,7 +10,7 @@ import com.oberasoftware.home.zwave.local.LocalZwaveSession;
 
 public class ZWaveController {
 
-	private static class MyEventListener implements EventHandler {
+	public static class MyEventListener implements EventHandler {
 
 		@EventSubscribe
 		public void handleSensorEvent(final DeviceSensorEvent sensorEvent) {
