@@ -25,6 +25,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+		echo 'do nothing'
 	    }
         }
 
