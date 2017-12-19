@@ -10,9 +10,9 @@ pipeline {
 	    steps {
 		sh 'apk update'
 		sh 'apk add rsync openssh openrc git'
+		sh 'rm -rf obera-base zwave'
 		sh 'git clone https://github.com/oberasoftware/obera-base.git'
 		sh 'cd obera-base && mvn -DskipTests install'
-		sh 'cd ..'
 		sh 'git clone https://github.com/comdata/zwave.git'
 		sh 'cd zwave && mvn -DskipTests install'
 	    } 
