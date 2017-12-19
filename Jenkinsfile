@@ -10,6 +10,9 @@ pipeline {
 	    steps {
 		sh 'apk update'
 		sh 'apk add rsync openssh openrc'
+		sh 'git clone https://github.com/comdata/zwave.git'
+		sh 'cd zwave'
+		sh 'mvn -DskipTests install'
 	    } 
 	}
 
