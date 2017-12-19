@@ -6,7 +6,6 @@ import com.oberasoftware.home.zwave.api.ZWaveSession;
 import com.oberasoftware.home.zwave.api.events.ZWaveEvent;
 import com.oberasoftware.home.zwave.api.events.devices.DeviceSensorEvent;
 import com.oberasoftware.home.zwave.exceptions.HomeAutomationException;
-import com.oberasoftware.home.zwave.local.LocalZwaveSession;
 
 public class ZWaveController {
 
@@ -20,6 +19,7 @@ public class ZWaveController {
 
 		@EventSubscribe
 		public void receive(final ZWaveEvent event) throws Exception {
+
 			System.out.println("Received an event: {}" + event);
 		}
 	}
@@ -31,7 +31,7 @@ public class ZWaveController {
 	public static void doZwaveStuff() {
 		System.out.println("Application startup");
 		try {
-			final ZWaveSession s = new LocalZwaveSession();
+			final ZWaveSession s = new HALocalZwaveSession("/dev/tty.usbserial-A70250X1");
 			s.connect();
 			s.subscribe(new MyEventListener());
 		} catch (final HomeAutomationException e) {
