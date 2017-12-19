@@ -9,39 +9,74 @@ import com.oberasoftware.home.zwave.exceptions.HomeAutomationException;
 
 public class ZWaveController {
 
-	public static class MyEventListener implements EventHandler {
+	public class HAEventListener implements EventHandler {
+
+		private HAZWaveEventListener eventListener;
+
+		public HAEventListener() {
+			this.eventListener = null;
+		}
+
+		public HAEventListener(HAZWaveEventListener eventListener) {
+			this.eventListener = eventListener;
+
+		}
+
+		public HAZWaveEventListener getEventListener() {
+			return eventListener;
+		}
 
 		@EventSubscribe
 		public void handleSensorEvent(final DeviceSensorEvent sensorEvent) {
 			System.out.println("Received a sensor: " + sensorEvent.getSensorType() + " value: "
 					+ sensorEvent.getValue().doubleValue() + " for node: " + sensorEvent.getNodeId());
+
+			if (getEventListener() != null) {
+				getEventListener().receiveZWaveSensorEvent(sensorEvent);
+			}
 		}
 
 		@EventSubscribe
 		public void receive(final ZWaveEvent event) throws Exception {
 
 			System.out.println("Received an event: {}" + event);
+			if (getEventListener() != null) {
+				getEventListener().receiveZWaveEvent(event);
+			}
 		}
-	}
 
-	/**
-	 * Initialises the binding. This is called after the 'updated' method has been
-	 * called and all configuration has been passed.
-	 */
-	public static void doZwaveStuff() {
-		System.out.println("Application startup");
-		try {
-			final ZWaveSession s = new HALocalZwaveSession("/dev/tty.usbserial-A70250X1");
-			s.connect();
-			s.subscribe(new MyEventListener());
-		} catch (final HomeAutomationException e) {
-			System.out.println("Error occurred in ZWave processing " + e);
+		public void setEventListener(HAZWaveEventListener eventListener) {
+			this.eventListener = eventListener;
 		}
 	}
 
 	public static void main(final String[] args) {
 		System.out.println("Starting Local ZWAVE App");
 
-		doZwaveStuff();
+		new ZWaveController();
+
+	}
+
+	public ZWaveController() {
+		init(null);
+	}
+
+	public ZWaveController(HAZWaveEventListener eventListener) {
+		init(eventListener);
+	}
+
+	/**
+	 * Initialises the binding. This is called after the 'updated' method has been
+	 * called and all configuration has been passed.
+	 */
+	public void init(HAZWaveEventListener eventListener) {
+		System.out.println("Application startup");
+		try {
+			final ZWaveSession s = new HALocalZwaveSession("/dev/tty.usbserial-A70250X1");
+			s.connect();
+			s.subscribe(new HAEventListener(eventListener));
+		} catch (final HomeAutomationException e) {
+			System.out.println("Error occurred in ZWave processing " + e);
+		}
 	}
 }
