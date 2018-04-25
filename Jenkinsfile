@@ -30,7 +30,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-		echo 'do nothing'
+		sh 'mvn deploy:deploy-file -Dfile=target/HomeAutomationZWave-0.0.1-SNAPSHOT-jar-with-dependencies.jar -DpomFile=pom.xml -DrepositoryId=archiva.snapshots -Durl=http://192.168.1.36:8080/repository/snapshots'
 	    }
         }
 
