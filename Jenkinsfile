@@ -5,6 +5,7 @@ pipeline {
             args '-v /var/jenkins_home/.m2:/root/.m2' 
         }
     }
+    triggers { upstream(upstreamProjects: 'zwave', threshold: hudson.model.Result.SUCCESS) }
     stages {
 	stage('Prepare') {
 	    steps {
