@@ -13,10 +13,12 @@ public class HASerialZWaveConnector extends SerialZWaveConnector {
 		this.portName = portName;
 	}
 
+	@Override
 	public String getPortName() {
 		return portName;
 	}
 
+	@Override
 	public void setPortName(String portName) {
 		this.portName = portName;
 	}
