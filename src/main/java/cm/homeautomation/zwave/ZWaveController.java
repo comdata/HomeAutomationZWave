@@ -37,7 +37,7 @@ public class ZWaveController {
 		}
 
 		@EventSubscribe
-		public void receive(final ZWaveEvent event) throws Exception {
+		public void receive(final ZWaveEvent event) {
 
 			System.out.println("Received an event: {}" + event);
 			if (getEventListener() != null) {
