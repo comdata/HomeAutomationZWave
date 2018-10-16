@@ -23,17 +23,15 @@ pipeline {
             parallel {
 		 stage('Build Backend') {
 			steps {
-				sh 'mvn -B clean install'
-            		}
+				withMaven() {
+				 
+
+				sh 'mvn -B clean deploy'
+				   
+				}
+            }
 		}
 	    }
         }
-
-        stage('Deploy') {
-            steps {
-		sh 'mvn deploy:deploy-file -Dfile=target/HomeAutomationZWave-0.0.1-SNAPSHOT.jar -DpomFile=pom.xml -DrepositoryId=archiva.snapshots -Durl=http://jenkins:8081/repository/snapshots'
-	    }
-        }
-
     }
 }
