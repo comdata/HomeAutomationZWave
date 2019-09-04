@@ -62,7 +62,7 @@
     <repository>
       <id>internal</id>
       <name>Archiva Managed Internal Repository</name>
-      <url>http://jenkins:8081/repository/internal/</url>
+      <url>http://nas:8082/repository/internal/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
@@ -73,7 +73,7 @@
         <repository>
       <id>snapshots</id>
       <name>Archiva Managed Snapshot Repository</name>
-      <url>http://jenkins:8081/repository/snapshots/</url>
+      <url>http://nas:8082/repository/snapshots/</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -86,7 +86,7 @@
     <pluginRepository>
       <id>internal</id>
       <name>Archiva Managed Internal Repository</name>
-      <url>http://jenkins:8081/repository/internal/</url>
+      <url>http://nas:8082/repository/internal/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
@@ -97,7 +97,7 @@
     <pluginRepository>
       <id>snapshots</id>
       <name>Archiva Managed Snapshot Repository</name>
-      <url>http://jenkins:8081/repository/snapshots/</url>
+      <url>http://nas:8082/repository/snapshots/</url>
       <releases>
         <enabled>false</enabled>
       </releases>
