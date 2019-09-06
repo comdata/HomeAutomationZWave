@@ -26,7 +26,7 @@ pipeline {
 				withMaven() {
 				 
 
-				sh 'mvn -B clean deploy'
+				sh '$MVN_CMD -B clean deploy'
 				   
 				}
             }
