@@ -19,8 +19,8 @@ pipeline {
 	    } 
 	}
 
-        stage('Build') { 
-            parallel {
+ 
+           
 		 stage('Build Backend') {
 			steps {
 				withMaven() {
@@ -30,8 +30,8 @@ pipeline {
 				   
 				}
             }
-		}
-	    }
+		
+	   
         }
     }
 }
