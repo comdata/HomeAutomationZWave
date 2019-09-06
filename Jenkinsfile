@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.5.4-jdk-8-alpine' 
-            args '' 
+            args '-v /root/.ssh:/root/.ssh -v $HOME/.m2:/root/.m2' 
         }
     }
     triggers { upstream(upstreamProjects: 'zwave', threshold: hudson.model.Result.SUCCESS) }
